@@ -16,12 +16,6 @@ namespace ClassLibraryGraph
         public bool IsActiveted {  get; set; }
         public int Number {  get;}
         private Graphics G { get; set; }
-        //public Vertex(int x, int y, bool isIt) 
-        //{
-        //    X = x;
-        //    Y = y;
-        //    IsActiveted = isIt;
-        //}
         public Vertex(int x, int y, int number, Graphics g) 
         {
             X = x;
@@ -49,13 +43,11 @@ namespace ClassLibraryGraph
 
             string text = Number.ToString();
 
-            // Розташування тексту порядкового номера
             Font font = new Font("Arial", 12);
             SizeF textSize = G.MeasureString(text, font);
             float x = X + 1 - textSize.Width / 2;
             float y = Y + 1 - textSize.Height / 2;
 
-            // Малювання порядкового номера біля вершини
             G.DrawString(text, font, Brushes.White, x, y);
         }
 
