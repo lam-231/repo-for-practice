@@ -16,11 +16,11 @@ namespace UI
     {
         private bool isVertexDrawingEnabled = false;
         private List<Vertex> vertices = new List<Vertex>();
-        private int vertexCount = 0;
-
+        private Graphics graphics;
         public Field()
         {
             InitializeComponent();
+            graphics = pictureBox1.CreateGraphics();
         }
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
@@ -38,7 +38,7 @@ namespace UI
         }
         private void drawVertex(Point point)
         {
-            var vertex = new Vertex(point.X, point.Y);
+            var vertex = new Vertex(point.X, point.Y, vertices.Count + 1, graphics);
 
             foreach (var vert in vertices)
             {
@@ -47,24 +47,7 @@ namespace UI
 
             vertex.draw();
 
-            Graphics g = pictureBox1.CreateGraphics();
-            g.FillEllipse(Brushes.DimGray, point.X - 15, point.Y - 15, 30, 30);
-            Pen pen = new Pen(Color.DarkGray, 3);
-            g.DrawEllipse(pen, point.X - 15, point.Y - 15, 30, 30);
-
             vertices.Add(vertex);
-
-            vertexCount++;
-            string text = vertexCount.ToString();
-
-            // Розташування тексту порядкового номера
-            Font font = new Font("Arial", 12);
-            SizeF textSize = g.MeasureString(text, font);
-            float x = point.X + 1 - textSize.Width / 2;
-            float y = point.Y + 1 - textSize.Height / 2;
-
-            // Малювання порядкового номера біля вершини
-            g.DrawString(text, font, Brushes.White, x, y);
         }
 
     }
