@@ -11,9 +11,10 @@ namespace ClassLibraryGraph
 
     public class Vertex
     {
+        const int Radius = 15; 
         public int X { get; set; }
         public int Y { get; set; }
-        public bool IsActiveted {  get; set; }
+        public bool IsSelected {  get; set; }
         public int Number {  get;}
         private Graphics G { get; set; }
         public Vertex(int x, int y, int number, Graphics g) 
@@ -22,24 +23,26 @@ namespace ClassLibraryGraph
             Y = y;
             Number = number;
             G = g;
-            IsActiveted = false;
+            IsSelected = false;
         }
-        public void isVertexActivate(int tryX, int tryY) 
+        public bool isPointOnVertex(int tryX, int tryY) 
         {
-            if (Math.Pow(X - tryX, 2) + Math.Pow(Y - tryY, 2) <= 900) IsActiveted = true;
-            else IsActiveted = false;
+            return Math.Pow(X - tryX, 2) + Math.Pow(Y - tryY, 2) <= Math.Pow(Radius, 2);
         }
 
-        public bool isOverlapingWithVertexinPoint(int tryX, int tryY) 
+        public bool isOverlapingWithVertexInPoint(int tryX, int tryY) 
         {
-            if(Math.Sqrt(Math.Pow(X - tryX, 2) + Math.Pow(Y - tryY, 2)) >= 31) return true;
-            else return false;
-        }
+            return Math.Sqrt(Math.Pow(X - tryX, 2) + Math.Pow(Y - tryY, 2)) <= 2 * Radius + 1;
+        } 
+        
         public void draw()
         {
-            G.FillEllipse(Brushes.DimGray, X - 15, Y - 15, 30, 30);
-            Pen pen = new Pen(Color.DarkGray, 3);
-            G.DrawEllipse(pen, X - 15, Y - 15, 30, 30);
+            G.FillEllipse(Brushes.DimGray, X - Radius, Y - Radius, Radius * 2, Radius * 2);
+
+            Color color = IsSelected ? Color.Orange: Color.DarkGray;
+            Pen pen = new Pen(color, 3);
+
+            G.DrawEllipse(pen, X - Radius, Y - Radius, Radius * 2, Radius * 2);
 
             string text = Number.ToString();
 
@@ -50,6 +53,8 @@ namespace ClassLibraryGraph
 
             G.DrawString(text, font, Brushes.White, x, y);
         }
+
+
 
     }
 }
