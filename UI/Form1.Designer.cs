@@ -30,8 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Field));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.buttonDrawCheck = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonAddVertex = new System.Windows.Forms.Button();
+            this.buttonSelect = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,34 +47,47 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
-            // buttonDrawCheck
+            // buttonAddVertex
             // 
-            this.buttonDrawCheck.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonDrawCheck.Location = new System.Drawing.Point(1039, 183);
-            this.buttonDrawCheck.Name = "buttonDrawCheck";
-            this.buttonDrawCheck.Size = new System.Drawing.Size(222, 65);
-            this.buttonDrawCheck.TabIndex = 1;
-            this.buttonDrawCheck.Text = "Drawing Disabled";
-            this.buttonDrawCheck.UseVisualStyleBackColor = true;
-            this.buttonDrawCheck.Click += new System.EventHandler(this.buttonDrawCheck_Click);
+            this.buttonAddVertex.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAddVertex.Location = new System.Drawing.Point(1039, 183);
+            this.buttonAddVertex.Name = "buttonAddVertex";
+            this.buttonAddVertex.Size = new System.Drawing.Size(222, 65);
+            this.buttonAddVertex.TabIndex = 1;
+            this.buttonAddVertex.Text = "Add Vertex";
+            this.buttonAddVertex.UseVisualStyleBackColor = true;
+            this.buttonAddVertex.Click += new System.EventHandler(this.buttonAddVertex_Click);
             // 
-            // button1
+            // buttonSelect
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(1039, 394);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(222, 65);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "temporary";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonSelect.Location = new System.Drawing.Point(1039, 378);
+            this.buttonSelect.Name = "buttonSelect";
+            this.buttonSelect.Size = new System.Drawing.Size(222, 65);
+            this.buttonSelect.TabIndex = 2;
+            this.buttonSelect.Text = "Select";
+            this.buttonSelect.UseVisualStyleBackColor = true;
+            this.buttonSelect.Click += new System.EventHandler(this.buttonSelect_Click);
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonDelete.Location = new System.Drawing.Point(1039, 286);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(222, 65);
+            this.buttonDelete.TabIndex = 3;
+            this.buttonDelete.Text = "Delete";
+            this.buttonDelete.UseVisualStyleBackColor = true;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // Field
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(1302, 673);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.buttonDrawCheck);
+            this.Controls.Add(this.buttonDelete);
+            this.Controls.Add(this.buttonSelect);
+            this.Controls.Add(this.buttonAddVertex);
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -82,6 +96,8 @@
             this.Name = "Field";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "курсач";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Field_KeyDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Field_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -90,8 +106,9 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Button buttonDrawCheck;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonAddVertex;
+        private System.Windows.Forms.Button buttonSelect;
+        private System.Windows.Forms.Button buttonDelete;
     }
 }
 
