@@ -78,7 +78,11 @@ namespace UI
                 foreach (var vert in vertices) vert.IsSelected = false;
             }
 
-            exitingVertex.IsSelected = true;
+            if(!exitingVertex.IsSelected) exitingVertex.IsSelected = true;
+            else
+            {
+                exitingVertex.IsSelected = false;
+            }
         }
         private void Field_KeyDown(object sender, KeyEventArgs e)
         {
