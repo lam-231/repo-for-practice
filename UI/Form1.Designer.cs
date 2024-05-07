@@ -33,6 +33,7 @@
             this.buttonAddVertex = new System.Windows.Forms.Button();
             this.buttonSelect = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonAddEdge = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,11 +81,23 @@
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
+            // buttonAddEdge
+            // 
+            this.buttonAddEdge.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonAddEdge.Location = new System.Drawing.Point(1039, 472);
+            this.buttonAddEdge.Name = "buttonAddEdge";
+            this.buttonAddEdge.Size = new System.Drawing.Size(222, 65);
+            this.buttonAddEdge.TabIndex = 4;
+            this.buttonAddEdge.Text = "Add Edge";
+            this.buttonAddEdge.UseVisualStyleBackColor = true;
+            this.buttonAddEdge.Click += new System.EventHandler(this.buttonAddEdge_Click);
+            // 
             // Field
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(1302, 673);
+            this.Controls.Add(this.buttonAddEdge);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonSelect);
             this.Controls.Add(this.buttonAddVertex);
@@ -109,6 +122,7 @@
         private System.Windows.Forms.Button buttonAddVertex;
         private System.Windows.Forms.Button buttonSelect;
         private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonAddEdge;
     }
 }
 

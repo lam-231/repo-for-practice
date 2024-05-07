@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using ClassLibraryGraph;
 using static System.Windows.Forms.LinkLabel;
 
@@ -16,13 +17,14 @@ namespace UI
     enum Mode
     {
         AddVertex,
+        AddEdge,
         Select
-
     }
     public partial class Field : System.Windows.Forms.Form
     {
         private Mode mode = Mode.Select;
         private List<Vertex> vertices = new List<Vertex>();
+        private List<Edge> edges = new List<Edge>();
         private Graphics graphics;
         private bool isCtrlPressed = false;
         private int lastAddedVertNumber = 0;
@@ -37,6 +39,7 @@ namespace UI
         private void render()
         {
             graphics.Clear(pictureBox1.BackColor);
+            foreach (Edge e in edges) e.draw();
             foreach (Vertex v in vertices) v.draw();
         }
         private Vertex getVertexByPoint(Point point)
@@ -46,9 +49,6 @@ namespace UI
                 if (v.isPointOnVertex(point.X, point.Y)) return v;
             }
             return null;
-        }
-        private void MainForm_Load(object sender, EventArgs e)
-        {
         }
         private void addVertex(Point point)
         {
@@ -61,6 +61,35 @@ namespace UI
 
             lastAddedVertNumber++;
             vertices.Add(vertex);
+        }
+        private void addEdge(Point point)
+        {
+            Vertex firstVertex = null;
+
+            firstVertex.draw();
+
+            foreach (var v in vertices) 
+                if (v.IsSelected)
+                {
+                    firstVertex = v;
+                    break;
+                }
+
+            if (firstVertex == null)
+            { 
+                firstVertex = getVertexByPoint(point);
+                if(firstVertex != null) firstVertex.IsSelected = true;
+                return;
+            }
+
+            Vertex secondVertex = getVertexByPoint(point);
+            if (secondVertex == null) return;
+
+            Edge edge = new Edge(firstVertex, secondVertex, graphics);
+            edges.Add(edge);
+
+            firstVertex.IsSelected = false;
+            render();
         }
         private void selectElement(Point point, bool isSelectMultiple)
         {
@@ -99,6 +128,9 @@ namespace UI
             if (mode == Mode.Select) selectElement(point, isCtrlPressed);
 
             if (mode == Mode.AddVertex) addVertex(point);
+            
+            if (mode == Mode.AddEdge) addEdge(point);
+
             render();
         }
         private void buttonDelete_Click(object sender, EventArgs e)
@@ -120,6 +152,12 @@ namespace UI
         private void buttonSelect_Click(object sender, EventArgs e)
         {
             mode = Mode.Select;
+        }
+        private void buttonAddEdge_Click(object sender, EventArgs e)
+        {
+            mode = Mode.AddEdge;
+            foreach (var vert in vertices) vert.IsSelected = false;
+            render();
         }
     }
 }

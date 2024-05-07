@@ -16,7 +16,7 @@ namespace ClassLibraryGraph
         public int Y { get; set; }
         public bool IsSelected {  get; set; }
         public int Number {  get;}
-        private Graphics G { get; set; }
+        protected Graphics G { get; set; }
         public Vertex(int x, int y, int number, Graphics g) 
         {
             X = x;
@@ -25,6 +25,7 @@ namespace ClassLibraryGraph
             G = g;
             IsSelected = false;
         }
+        public Vertex() { }
         public bool isPointOnVertex(int tryX, int tryY) 
         {
             return Math.Pow(X - tryX, 2) + Math.Pow(Y - tryY, 2) <= Math.Pow(Radius, 2);
