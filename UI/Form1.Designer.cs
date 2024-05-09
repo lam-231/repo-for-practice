@@ -34,6 +34,7 @@
             this.buttonSelect = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
             this.buttonAddEdge = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,11 +93,22 @@
             this.buttonAddEdge.UseVisualStyleBackColor = true;
             this.buttonAddEdge.Click += new System.EventHandler(this.buttonAddEdge_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label1.Location = new System.Drawing.Point(1032, 67);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(211, 39);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Num of edge";
+            // 
             // Field
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(1302, 673);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonAddEdge);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonSelect);
@@ -113,6 +125,7 @@
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Field_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -123,6 +136,7 @@
         private System.Windows.Forms.Button buttonSelect;
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.Button buttonAddEdge;
+        private System.Windows.Forms.Label label1;
     }
 }
 

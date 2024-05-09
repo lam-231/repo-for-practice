@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace ClassLibraryGraph
 {
-    public class Edge 
+    public class Edge
     {
         private Vertex firstVertex { get; set; }
         private Vertex secondVertex { get; set; }
-        private Graphics G {  get; set; }
-        public bool isSelected {  get; set; }
+        private Graphics G { get; set; }
+        public bool isSelected { get; set; }
         public Edge(Vertex firstVertex, Vertex secondVertex, Graphics G)
         {
             this.firstVertex = firstVertex;
@@ -32,5 +32,11 @@ namespace ClassLibraryGraph
             G.DrawLine(pen, firstVertex.X, firstVertex.Y, secondVertex.X, secondVertex.Y);
 
         }
+        public bool doesContainVertex(Vertex tryVertex)
+        {
+            if (tryVertex == firstVertex || tryVertex == secondVertex) return true;
+            return false;
+        }
+
     }
 }

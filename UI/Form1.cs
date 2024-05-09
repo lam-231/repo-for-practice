@@ -66,9 +66,7 @@ namespace UI
         {
             Vertex firstVertex = null;
 
-            firstVertex.draw();
-
-            foreach (var v in vertices) 
+            foreach (var v in vertices)
                 if (v.IsSelected)
                 {
                     firstVertex = v;
@@ -76,14 +74,17 @@ namespace UI
                 }
 
             if (firstVertex == null)
-            { 
+            {
                 firstVertex = getVertexByPoint(point);
-                if(firstVertex != null) firstVertex.IsSelected = true;
+                if (firstVertex != null) firstVertex.IsSelected = true;
                 return;
             }
-
+            
             Vertex secondVertex = getVertexByPoint(point);
-            if (secondVertex == null) return;
+
+            foreach (var e in edges) if (e.doesContainVertex(firstVertex) && e.doesContainVertex(secondVertex)) return;
+
+            if (secondVertex == null || firstVertex == secondVertex) return;
 
             Edge edge = new Edge(firstVertex, secondVertex, graphics);
             edges.Add(edge);
@@ -132,17 +133,23 @@ namespace UI
             if (mode == Mode.AddEdge) addEdge(point);
 
             render();
+
+            label1.Text = edges.Count.ToString();
         }
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             List<Vertex> verticesToRemove = new List<Vertex>();
+            List<Edge> edgesToRemove = new List<Edge>();
 
             foreach(var vert in vertices)
             {
                 if (!vert.IsSelected) continue;
                 verticesToRemove.Add(vert);
+                foreach (var edge in edges) if(edge.doesContainVertex(vert)) edgesToRemove.Add(edge);
             }
-            foreach (var vrt in verticesToRemove) vertices.Remove(vrt);
+            foreach (var vrt in verticesToRemove)  vertices.Remove(vrt);
+            foreach (var edg in edgesToRemove) edges.Remove(edg);
+
             render();
         }
         private void buttonAddVertex_Click(object sender, EventArgs e)

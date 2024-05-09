@@ -54,7 +54,7 @@ namespace ClassLibraryGraph
 
             G.DrawString(text, font, Brushes.White, x, y);
         }
-
+       
 
 
     }
