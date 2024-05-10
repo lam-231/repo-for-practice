@@ -50,6 +50,14 @@ namespace UI
             }
             return null;
         }
+        private Edge getEdgeByPoint(Point point)
+        {
+            foreach (Edge e in edges)
+            {
+                if (e.isPointOnEdge(point.X, point.Y)) return e;
+            }
+            return null;
+        }
         private void addVertex(Point point)
         {
             var vertex = new Vertex(point.X, point.Y, lastAddedVertNumber + 1, graphics);
@@ -94,24 +102,34 @@ namespace UI
         }
         private void selectElement(Point point, bool isSelectMultiple)
         {
-            var exitingVertex = getVertexByPoint(point);
+            Edge exitingEdge = new Edge();
 
-            if (exitingVertex == null)
+            var exitingVertex = getVertexByPoint(point);
+            if (exitingVertex == null) exitingEdge = getEdgeByPoint(point); 
+
+            if (exitingVertex == null && exitingEdge == null)
             {
                 foreach (var vert in vertices) vert.IsSelected = false;
+                foreach (var edg in edges) edg.IsSelected = false;
                 return;
             }
-
 
             if(!isSelectMultiple)
             {
                 foreach (var vert in vertices) vert.IsSelected = false;
+                foreach (var edg in edges) edg.IsSelected = false;
             }
 
+            if(exitingVertex != null)
+            { 
             if(!exitingVertex.IsSelected) exitingVertex.IsSelected = true;
-            else
-            {
-                exitingVertex.IsSelected = false;
+            else exitingVertex.IsSelected = false;
+            }
+
+            if(exitingEdge != null)
+            { 
+            if (!exitingEdge.IsSelected) exitingEdge.IsSelected = true;
+            else exitingEdge.IsSelected = true;
             }
         }
         private void Field_KeyDown(object sender, KeyEventArgs e)
@@ -135,6 +153,9 @@ namespace UI
             render();
 
             label1.Text = edges.Count.ToString();
+            labelXOfPoint.Text = point.X.ToString();
+            labelYOfPoint.Text = point.Y.ToString();
+            //label4.Text = ;
         }
         private void buttonDelete_Click(object sender, EventArgs e)
         {
@@ -145,8 +166,13 @@ namespace UI
             {
                 if (!vert.IsSelected) continue;
                 verticesToRemove.Add(vert);
-                foreach (var edge in edges) if(edge.doesContainVertex(vert)) edgesToRemove.Add(edge);
+                foreach (var edge in edges)
+                { 
+                    if(edge.doesContainVertex(vert)) edgesToRemove.Add(edge);
+                }
             }
+
+
             foreach (var vrt in verticesToRemove)  vertices.Remove(vrt);
             foreach (var edg in edgesToRemove) edges.Remove(edg);
 
