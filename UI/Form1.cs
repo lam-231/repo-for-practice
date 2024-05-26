@@ -41,7 +41,7 @@ namespace UI
             this.KeyDown += new KeyEventHandler(Field_KeyDown);
             this.KeyUp += new KeyEventHandler(Field_KeyUp);
         }
-       
+      
         private void render()
         {
             graphics.Clear(pictureBox1.BackColor);
