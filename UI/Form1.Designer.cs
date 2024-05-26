@@ -37,10 +37,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.labelXOfPoint = new System.Windows.Forms.Label();
             this.labelYOfPoint = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.buttonMoveVertex = new System.Windows.Forms.Button();
+            this.buttonShortestWay = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,17 +49,18 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Linen;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(24, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(24, 15);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(950, 635);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             // 
             // buttonAddVertex
             // 
             this.buttonAddVertex.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAddVertex.Location = new System.Drawing.Point(1027, 290);
+            this.buttonAddVertex.Location = new System.Drawing.Point(1027, 310);
             this.buttonAddVertex.Name = "buttonAddVertex";
             this.buttonAddVertex.Size = new System.Drawing.Size(222, 65);
             this.buttonAddVertex.TabIndex = 1;
@@ -69,7 +71,7 @@
             // buttonSelect
             // 
             this.buttonSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonSelect.Location = new System.Drawing.Point(1027, 485);
+            this.buttonSelect.Location = new System.Drawing.Point(1027, 490);
             this.buttonSelect.Name = "buttonSelect";
             this.buttonSelect.Size = new System.Drawing.Size(222, 65);
             this.buttonSelect.TabIndex = 2;
@@ -80,7 +82,7 @@
             // buttonDelete
             // 
             this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonDelete.Location = new System.Drawing.Point(1027, 393);
+            this.buttonDelete.Location = new System.Drawing.Point(1027, 400);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(222, 65);
             this.buttonDelete.TabIndex = 3;
@@ -91,7 +93,7 @@
             // buttonAddEdge
             // 
             this.buttonAddEdge.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAddEdge.Location = new System.Drawing.Point(1027, 579);
+            this.buttonAddEdge.Location = new System.Drawing.Point(1027, 580);
             this.buttonAddEdge.Name = "buttonAddEdge";
             this.buttonAddEdge.Size = new System.Drawing.Size(222, 65);
             this.buttonAddEdge.TabIndex = 4;
@@ -129,16 +131,6 @@
             this.labelYOfPoint.TabIndex = 7;
             this.labelYOfPoint.Text = "null";
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(1046, 136);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(203, 38);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Num of edge";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -169,15 +161,38 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "point y:";
             // 
+            // buttonMoveVertex
+            // 
+            this.buttonMoveVertex.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonMoveVertex.Location = new System.Drawing.Point(1027, 220);
+            this.buttonMoveVertex.Name = "buttonMoveVertex";
+            this.buttonMoveVertex.Size = new System.Drawing.Size(222, 65);
+            this.buttonMoveVertex.TabIndex = 12;
+            this.buttonMoveVertex.Text = "Move Vertex";
+            this.buttonMoveVertex.UseVisualStyleBackColor = true;
+            this.buttonMoveVertex.Click += new System.EventHandler(this.buttonMoveVertex_Click);
+            // 
+            // buttonShortestWay
+            // 
+            this.buttonShortestWay.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonShortestWay.Location = new System.Drawing.Point(1027, 138);
+            this.buttonShortestWay.Name = "buttonShortestWay";
+            this.buttonShortestWay.Size = new System.Drawing.Size(222, 65);
+            this.buttonShortestWay.TabIndex = 13;
+            this.buttonShortestWay.Text = "Shortest Way";
+            this.buttonShortestWay.UseVisualStyleBackColor = true;
+            this.buttonShortestWay.Click += new System.EventHandler(this.buttonShortestWay_Click);
+            // 
             // Field
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(1302, 673);
+            this.Controls.Add(this.buttonShortestWay);
+            this.Controls.Add(this.buttonMoveVertex);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.labelYOfPoint);
             this.Controls.Add(this.labelXOfPoint);
             this.Controls.Add(this.label1);
@@ -211,10 +226,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelXOfPoint;
         private System.Windows.Forms.Label labelYOfPoint;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button buttonMoveVertex;
+        private System.Windows.Forms.Button buttonShortestWay;
     }
 }
 

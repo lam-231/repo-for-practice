@@ -17,7 +17,9 @@ namespace UI
     enum Mode
     {
         AddVertex,
+        MoveVertex,
         AddEdge,
+        ShortestWay,
         Select
     }
     public partial class Field : System.Windows.Forms.Form
@@ -28,6 +30,9 @@ namespace UI
         private Graphics graphics;
         private bool isCtrlPressed = false;
         private int lastAddedVertNumber = 0;
+        private Vertex movingVertex = null;
+        private Vertex selectedStartVertex = null;
+        private Vertex selectedEndVertex = null;
         public Field()
         {
             InitializeComponent();
@@ -36,6 +41,7 @@ namespace UI
             this.KeyDown += new KeyEventHandler(Field_KeyDown);
             this.KeyUp += new KeyEventHandler(Field_KeyUp);
         }
+       
         private void render()
         {
             graphics.Clear(pictureBox1.BackColor);
@@ -105,7 +111,7 @@ namespace UI
             Edge exitingEdge = new Edge();
 
             var exitingVertex = getVertexByPoint(point);
-            if (exitingVertex == null) exitingEdge = getEdgeByPoint(point); 
+            if (exitingVertex == null) exitingEdge = getEdgeByPoint(point);
 
             if (exitingVertex == null && exitingEdge == null)
             {
@@ -120,16 +126,49 @@ namespace UI
                 foreach (var edg in edges) edg.IsSelected = false;
             }
 
-            if(exitingVertex != null)
-            { 
-            if(!exitingVertex.IsSelected) exitingVertex.IsSelected = true;
-            else exitingVertex.IsSelected = false;
+            if (exitingVertex != null)
+            {
+                if (!exitingVertex.IsSelected) exitingVertex.IsSelected = true;
+                else exitingVertex.IsSelected = false;
             }
 
-            if(exitingEdge != null)
+            if (exitingEdge != null)
             { 
-            if (!exitingEdge.IsSelected) exitingEdge.IsSelected = true;
-            else exitingEdge.IsSelected = true;
+                if (!exitingEdge.IsSelected) exitingEdge.IsSelected = true;
+                else exitingEdge.IsSelected = true;
+            }
+        }
+        private void shortestWay(Point point)
+        {
+            var exitingVertex = getVertexByPoint(point);
+
+            if (exitingVertex == null) return;
+
+            if (selectedStartVertex == null)
+            {
+                selectedStartVertex = exitingVertex;
+                selectedStartVertex.IsSelected = true;
+            }
+            else if (selectedEndVertex == null)
+            {
+                selectedEndVertex = exitingVertex;
+                selectedEndVertex.IsSelected = true;
+                var path = Graph.Dijkstra(selectedStartVertex, selectedEndVertex, vertices, edges);
+                foreach (var edge in path) 
+                {
+                    edge.IsSelected = true;
+                    edge.firstVertex.IsSelected = true;
+                    edge.secondVertex.IsSelected = true;
+                }
+                render();
+            }
+            else
+            {
+                foreach (var vert in vertices) vert.IsSelected = false;
+                foreach (var edg in edges) edg.IsSelected = false;
+                selectedStartVertex = exitingVertex;
+                selectedStartVertex.IsSelected = true;
+                selectedEndVertex = null;
             }
         }
         private void Field_KeyDown(object sender, KeyEventArgs e)
@@ -150,17 +189,29 @@ namespace UI
             
             if (mode == Mode.AddEdge) addEdge(point);
 
+            if (mode == Mode.MoveVertex)
+            {
+                if(movingVertex != null) movingVertex = null;
+                else movingVertex = getVertexByPoint(point);
+            }
+            if (mode == Mode.ShortestWay) shortestWay(point);
+
             render();
 
             label1.Text = edges.Count.ToString();
             labelXOfPoint.Text = point.X.ToString();
             labelYOfPoint.Text = point.Y.ToString();
-            //label4.Text = ;
         }
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             List<Vertex> verticesToRemove = new List<Vertex>();
             List<Edge> edgesToRemove = new List<Edge>();
+
+            foreach(var edg in edges)
+            {
+                if(!edg.IsSelected) continue;
+                edgesToRemove.Add(edg);
+            }
 
             foreach(var vert in vertices)
             {
@@ -171,7 +222,6 @@ namespace UI
                     if(edge.doesContainVertex(vert)) edgesToRemove.Add(edge);
                 }
             }
-
 
             foreach (var vrt in verticesToRemove)  vertices.Remove(vrt);
             foreach (var edg in edgesToRemove) edges.Remove(edg);
@@ -190,6 +240,31 @@ namespace UI
         {
             mode = Mode.AddEdge;
             foreach (var vert in vertices) vert.IsSelected = false;
+            render();
+        }
+        private void buttonMoveVertex_Click(object sender, EventArgs e)
+        {
+            mode= Mode.MoveVertex;
+            foreach (var vert in vertices) vert.IsSelected = false;
+            render();
+        }
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mode != Mode.MoveVertex || movingVertex == null) return;
+            Point movePoint = e.Location;
+
+            movingVertex.X = movePoint.X;
+            movingVertex.Y = movePoint.Y;
+
+            render();
+        }
+        private void buttonShortestWay_Click(object sender, EventArgs e)
+        {
+            mode = Mode.ShortestWay;
+            foreach (var vert in vertices) vert.IsSelected = false;
+            foreach (var edge in edges) edge.IsSelected = false;
+            selectedStartVertex = null;
+            selectedEndVertex = null;
             render();
         }
     }

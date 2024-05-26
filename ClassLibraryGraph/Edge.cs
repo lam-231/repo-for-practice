@@ -9,30 +9,44 @@ using System.Threading.Tasks;
 
 namespace ClassLibraryGraph
 {
-    public class Edge
+    public class Edge : GraphElement
     {
-        private Vertex firstVertex { get; set; }
-        private Vertex secondVertex { get; set; }
+        public Vertex firstVertex { get; set; }
+        public Vertex secondVertex { get; set; }
+        public int weigth { get; set; }
         private Graphics G { get; set; }
-        public bool IsSelected { get; set; }
         public Edge() { }
         public Edge(Vertex firstVertex, Vertex secondVertex, Graphics G)
         {
             this.firstVertex = firstVertex;
             this.secondVertex = secondVertex;
             this.G = G;
+            weigth = getEdgeSize();
             IsSelected = false;
         }
-        public float getEdgeSize()
+        public int getEdgeSize()
         {
-            return (float)Math.Sqrt(Math.Pow(firstVertex.X - secondVertex.X, 2) + Math.Pow(firstVertex.Y - secondVertex.Y, 2));
+            return (int)Math.Sqrt(Math.Pow(firstVertex.X - secondVertex.X, 2) + Math.Pow(firstVertex.Y - secondVertex.Y, 2));
         }
-        public void draw()
+        public override void draw()
         {
             Color color = IsSelected ? Color.Orange : Color.LightGray;
             Pen pen = new Pen(color, 5);
             G.DrawLine(pen, firstVertex.X, firstVertex.Y, secondVertex.X, secondVertex.Y);
 
+            string text = getEdgeSize().ToString();
+
+            Font font = new Font("Arial", 7);
+            SizeF textSize = G.MeasureString(text, font);
+            float x = (firstVertex.X + secondVertex.X) / 2 + 1 - textSize.Width / 2;
+            float y = (firstVertex.Y + secondVertex.Y) / 2 + 1 - textSize.Height / 2;
+
+            G.DrawString(text, font, Brushes.Black, x, y);
+        }
+
+        public float getWeight()
+        {
+            return (float)Math.Sqrt(Math.Pow(secondVertex.X - firstVertex.X, 2) + Math.Pow(secondVertex.Y - firstVertex.Y, 2));
         }
         public bool isPointOnEdge(int tryX, int tryY)
         {

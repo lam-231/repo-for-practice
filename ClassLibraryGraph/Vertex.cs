@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
 
-namespace ClassLibraryGraph
+namespace ClassLibraryGraph 
 {
 
-    public class Vertex
+    public class Vertex : GraphElement
     {
         const int Radius = 15; 
         public int X { get; set; }
         public int Y { get; set; }
-        public bool IsSelected {  get; set; }
         public int Number {  get;}
         protected Graphics G { get; set; }
         public Vertex(int x, int y, int number, Graphics g) 
@@ -36,7 +35,7 @@ namespace ClassLibraryGraph
             return Math.Sqrt(Math.Pow(X - tryX, 2) + Math.Pow(Y - tryY, 2)) <= 2 * Radius + 1;
         } 
         
-        public void draw()
+        public override void draw()
         {
             G.FillEllipse(Brushes.DimGray, X - Radius, Y - Radius, Radius * 2, Radius * 2);
 
