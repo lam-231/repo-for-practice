@@ -48,6 +48,11 @@ namespace UI
             foreach (Edge e in edges) e.draw();
             foreach (Vertex v in vertices) v.draw();
         }
+        private void isSelectedToFalse()
+        {
+            foreach (var edge in edges) edge.IsSelected = false;
+            foreach (var vert  in vertices) vert.IsSelected = false;
+        }
         private Vertex getVertexByPoint(Point point)
         {
             foreach (Vertex v in vertices)
@@ -164,8 +169,7 @@ namespace UI
             }
             else
             {
-                foreach (var vert in vertices) vert.IsSelected = false;
-                foreach (var edg in edges) edg.IsSelected = false;
+                isSelectedToFalse();
                 selectedStartVertex = exitingVertex;
                 selectedStartVertex.IsSelected = true;
                 selectedEndVertex = null;
@@ -194,6 +198,7 @@ namespace UI
                 if(movingVertex != null) movingVertex = null;
                 else movingVertex = getVertexByPoint(point);
             }
+
             if (mode == Mode.ShortestWay) shortestWay(point);
 
             render();
@@ -204,6 +209,8 @@ namespace UI
         }
         private void buttonDelete_Click(object sender, EventArgs e)
         {
+            if (mode == Mode.ShortestWay) return;
+            
             List<Vertex> verticesToRemove = new List<Vertex>();
             List<Edge> edgesToRemove = new List<Edge>();
 
@@ -226,26 +233,30 @@ namespace UI
             foreach (var vrt in verticesToRemove)  vertices.Remove(vrt);
             foreach (var edg in edgesToRemove) edges.Remove(edg);
 
+            isSelectedToFalse();
+
             render();
         }
         private void buttonAddVertex_Click(object sender, EventArgs e)
         {
             mode = Mode.AddVertex;
+            isSelectedToFalse();
         }
         private void buttonSelect_Click(object sender, EventArgs e)
         {
             mode = Mode.Select;
+            isSelectedToFalse();
         }
         private void buttonAddEdge_Click(object sender, EventArgs e)
         {
             mode = Mode.AddEdge;
-            foreach (var vert in vertices) vert.IsSelected = false;
+            isSelectedToFalse();
             render();
         }
         private void buttonMoveVertex_Click(object sender, EventArgs e)
         {
             mode= Mode.MoveVertex;
-            foreach (var vert in vertices) vert.IsSelected = false;
+            isSelectedToFalse();
             render();
         }
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -256,16 +267,26 @@ namespace UI
             movingVertex.X = movePoint.X;
             movingVertex.Y = movePoint.Y;
 
+            isSelectedToFalse();
+
             render();
         }
         private void buttonShortestWay_Click(object sender, EventArgs e)
         {
             mode = Mode.ShortestWay;
-            foreach (var vert in vertices) vert.IsSelected = false;
-            foreach (var edge in edges) edge.IsSelected = false;
             selectedStartVertex = null;
             selectedEndVertex = null;
+
+            isSelectedToFalse();
             render();
+        }
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

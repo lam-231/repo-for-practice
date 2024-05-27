@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
+using Newtonsoft.Json;
 
 namespace ClassLibraryGraph 
 {
@@ -15,6 +16,7 @@ namespace ClassLibraryGraph
         public int X { get; set; }
         public int Y { get; set; }
         public int Number {  get;}
+        [JsonIgnore]
         protected Graphics G { get; set; }
         public Vertex(int x, int y, int number, Graphics g) 
         {
@@ -25,6 +27,10 @@ namespace ClassLibraryGraph
             IsSelected = false;
         }
         public Vertex() { }
+        public void SetGraphics(Graphics graphics) 
+        {
+            G = graphics;
+        }
         public bool isPointOnVertex(int tryX, int tryY) 
         {
             return Math.Pow(X - tryX, 2) + Math.Pow(Y - tryY, 2) <= Math.Pow(Radius, 2);

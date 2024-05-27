@@ -42,6 +42,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.buttonMoveVertex = new System.Windows.Forms.Button();
             this.buttonShortestWay = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -60,9 +62,9 @@
             // buttonAddVertex
             // 
             this.buttonAddVertex.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAddVertex.Location = new System.Drawing.Point(1027, 310);
+            this.buttonAddVertex.Location = new System.Drawing.Point(995, 203);
             this.buttonAddVertex.Name = "buttonAddVertex";
-            this.buttonAddVertex.Size = new System.Drawing.Size(222, 65);
+            this.buttonAddVertex.Size = new System.Drawing.Size(140, 70);
             this.buttonAddVertex.TabIndex = 1;
             this.buttonAddVertex.Text = "Add Vertex";
             this.buttonAddVertex.UseVisualStyleBackColor = true;
@@ -71,9 +73,9 @@
             // buttonSelect
             // 
             this.buttonSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonSelect.Location = new System.Drawing.Point(1027, 490);
+            this.buttonSelect.Location = new System.Drawing.Point(995, 280);
             this.buttonSelect.Name = "buttonSelect";
-            this.buttonSelect.Size = new System.Drawing.Size(222, 65);
+            this.buttonSelect.Size = new System.Drawing.Size(140, 70);
             this.buttonSelect.TabIndex = 2;
             this.buttonSelect.Text = "Select";
             this.buttonSelect.UseVisualStyleBackColor = true;
@@ -82,9 +84,9 @@
             // buttonDelete
             // 
             this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonDelete.Location = new System.Drawing.Point(1027, 400);
+            this.buttonDelete.Location = new System.Drawing.Point(1141, 280);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(222, 65);
+            this.buttonDelete.Size = new System.Drawing.Size(140, 70);
             this.buttonDelete.TabIndex = 3;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;
@@ -93,9 +95,9 @@
             // buttonAddEdge
             // 
             this.buttonAddEdge.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAddEdge.Location = new System.Drawing.Point(1027, 580);
+            this.buttonAddEdge.Location = new System.Drawing.Point(1141, 204);
             this.buttonAddEdge.Name = "buttonAddEdge";
-            this.buttonAddEdge.Size = new System.Drawing.Size(222, 65);
+            this.buttonAddEdge.Size = new System.Drawing.Size(140, 70);
             this.buttonAddEdge.TabIndex = 4;
             this.buttonAddEdge.Text = "Add Edge";
             this.buttonAddEdge.UseVisualStyleBackColor = true;
@@ -164,9 +166,9 @@
             // buttonMoveVertex
             // 
             this.buttonMoveVertex.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonMoveVertex.Location = new System.Drawing.Point(1027, 220);
+            this.buttonMoveVertex.Location = new System.Drawing.Point(1141, 356);
             this.buttonMoveVertex.Name = "buttonMoveVertex";
-            this.buttonMoveVertex.Size = new System.Drawing.Size(222, 65);
+            this.buttonMoveVertex.Size = new System.Drawing.Size(140, 70);
             this.buttonMoveVertex.TabIndex = 12;
             this.buttonMoveVertex.Text = "Move Vertex";
             this.buttonMoveVertex.UseVisualStyleBackColor = true;
@@ -175,19 +177,43 @@
             // buttonShortestWay
             // 
             this.buttonShortestWay.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonShortestWay.Location = new System.Drawing.Point(1027, 138);
+            this.buttonShortestWay.Location = new System.Drawing.Point(995, 356);
             this.buttonShortestWay.Name = "buttonShortestWay";
-            this.buttonShortestWay.Size = new System.Drawing.Size(222, 65);
+            this.buttonShortestWay.Size = new System.Drawing.Size(140, 70);
             this.buttonShortestWay.TabIndex = 13;
             this.buttonShortestWay.Text = "Shortest Way";
             this.buttonShortestWay.UseVisualStyleBackColor = true;
             this.buttonShortestWay.Click += new System.EventHandler(this.buttonShortestWay_Click);
+            // 
+            // buttonSave
+            // 
+            this.buttonSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonSave.Location = new System.Drawing.Point(995, 432);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(140, 70);
+            this.buttonSave.TabIndex = 15;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button2.Location = new System.Drawing.Point(1141, 432);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(140, 70);
+            this.button2.TabIndex = 14;
+            this.button2.Text = "Load";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Field
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(1302, 673);
+            this.Controls.Add(this.buttonSave);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.buttonShortestWay);
             this.Controls.Add(this.buttonMoveVertex);
             this.Controls.Add(this.label5);
@@ -231,6 +257,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button buttonMoveVertex;
         private System.Windows.Forms.Button buttonShortestWay;
+        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Button button2;
     }
 }
 

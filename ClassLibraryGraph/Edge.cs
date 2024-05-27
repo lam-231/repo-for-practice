@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace ClassLibraryGraph
 {
@@ -14,8 +15,13 @@ namespace ClassLibraryGraph
         public Vertex firstVertex { get; set; }
         public Vertex secondVertex { get; set; }
         public int weigth { get; set; }
+        [JsonIgnore]
         private Graphics G { get; set; }
         public Edge() { }
+        public void SetGraphics(Graphics graphics)
+        {
+            G = graphics;
+        }
         public Edge(Vertex firstVertex, Vertex secondVertex, Graphics G)
         {
             this.firstVertex = firstVertex;
