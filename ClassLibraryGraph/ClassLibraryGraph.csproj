@@ -51,6 +51,7 @@
     <Compile Include="Edge.cs" />
     <Compile Include="Graph.cs" />
     <Compile Include="GraphElement.cs" />
+    <Compile Include="GraphStorage.cs" />
     <Compile Include="Vertex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

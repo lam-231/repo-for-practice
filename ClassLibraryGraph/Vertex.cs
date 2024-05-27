@@ -15,9 +15,9 @@ namespace ClassLibraryGraph
         const int Radius = 15; 
         public int X { get; set; }
         public int Y { get; set; }
-        public int Number {  get;}
+        public int Number { get; set; }
         [JsonIgnore]
-        protected Graphics G { get; set; }
+        public Graphics G { get; set; }
         public Vertex(int x, int y, int number, Graphics g) 
         {
             X = x;
@@ -59,8 +59,5 @@ namespace ClassLibraryGraph
 
             G.DrawString(text, font, Brushes.White, x, y);
         }
-       
-
-
     }
 }

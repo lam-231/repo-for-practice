@@ -16,7 +16,7 @@ namespace ClassLibraryGraph
         public Vertex secondVertex { get; set; }
         public int weigth { get; set; }
         [JsonIgnore]
-        private Graphics G { get; set; }
+        public Graphics G { get; set; }
         public Edge() { }
         public void SetGraphics(Graphics graphics)
         {

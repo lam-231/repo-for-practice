@@ -4,12 +4,14 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using ClassLibraryGraph;
+using Newtonsoft.Json;
 using static System.Windows.Forms.LinkLabel;
 
 namespace UI
@@ -33,6 +35,7 @@ namespace UI
         private Vertex movingVertex = null;
         private Vertex selectedStartVertex = null;
         private Vertex selectedEndVertex = null;
+        private GraphStorage graphStorage;
         public Field()
         {
             InitializeComponent();
@@ -40,6 +43,7 @@ namespace UI
             this.KeyPreview = true;
             this.KeyDown += new KeyEventHandler(Field_KeyDown);
             this.KeyUp += new KeyEventHandler(Field_KeyUp);
+            graphStorage = new GraphStorage();
         }
       
         private void render()
@@ -282,11 +286,56 @@ namespace UI
         }
         private void buttonSave_Click(object sender, EventArgs e)
         {
-
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamWriter file = File.CreateText(saveFileDialog.FileName))
+                {
+                    var serializer = new JsonSerializer();
+                    serializer.Serialize(file, new { vertices, edges });
+                }
+            }
         }
-        private void button2_Click(object sender, EventArgs e)
-        {
 
+        private void buttonLoad_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "JSON files (*.json)|*.json|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamReader file = File.OpenText(openFileDialog.FileName))
+                {
+                    var serializer = new JsonSerializer();
+                    var data = (GraphStorage)serializer.Deserialize(file, typeof(GraphStorage));
+                    vertices = data.Vertices;
+                    edges = data.Edges;
+
+                    
+                    foreach (var vertex in vertices)
+                    {
+                        vertex.G = graphics;
+                    }
+
+                    foreach (var edge in edges)
+                    {
+                        edge.G = graphics; 
+                        edge.firstVertex = vertices.FirstOrDefault(v => v.Number == edge.firstVertex.Number); 
+                        edge.secondVertex = vertices.FirstOrDefault(v => v.Number == edge.secondVertex.Number); 
+                    }
+
+                    if (vertices.Count > 0)
+                    {
+                        lastAddedVertNumber = vertices.Max(v => v.Number);
+                    }
+                    else
+                    {
+                        lastAddedVertNumber = 0;
+                    }
+
+                    render(); 
+                }
+            }
         }
     }
 }

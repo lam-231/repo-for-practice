@@ -43,7 +43,7 @@
             this.buttonMoveVertex = new System.Windows.Forms.Button();
             this.buttonShortestWay = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonLoad = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -196,16 +196,16 @@
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
-            // button2
+            // buttonLoad
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(1141, 432);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(140, 70);
-            this.button2.TabIndex = 14;
-            this.button2.Text = "Load";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.buttonLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonLoad.Location = new System.Drawing.Point(1141, 432);
+            this.buttonLoad.Name = "buttonLoad";
+            this.buttonLoad.Size = new System.Drawing.Size(140, 70);
+            this.buttonLoad.TabIndex = 14;
+            this.buttonLoad.Text = "Load";
+            this.buttonLoad.UseVisualStyleBackColor = true;
+            this.buttonLoad.Click += new System.EventHandler(this.buttonLoad_Click);
             // 
             // Field
             // 
@@ -213,7 +213,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.ClientSize = new System.Drawing.Size(1302, 673);
             this.Controls.Add(this.buttonSave);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.buttonLoad);
             this.Controls.Add(this.buttonShortestWay);
             this.Controls.Add(this.buttonMoveVertex);
             this.Controls.Add(this.label5);
@@ -258,7 +258,7 @@
         private System.Windows.Forms.Button buttonMoveVertex;
         private System.Windows.Forms.Button buttonShortestWay;
         private System.Windows.Forms.Button buttonSave;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonLoad;
     }
 }
 
