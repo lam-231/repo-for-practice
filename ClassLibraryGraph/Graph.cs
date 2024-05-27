@@ -56,16 +56,16 @@ namespace ClassLibraryGraph
 
                 foreach (var edge in edges)
                 {
-                    if (edge.doesContainVertex(currentVertex))
+                    if (!edge.doesContainVertex(currentVertex)) continue;
+                    
+                    var neighbor = (edge.firstVertex == currentVertex) ? edge.secondVertex : edge.firstVertex;
+                    var newDist = distances[currentVertex] + edge.getWeight();
+                    if (newDist < distances[neighbor])
                     {
-                        var neighbor = (edge.firstVertex == currentVertex) ? edge.secondVertex : edge.firstVertex;
-                        var newDist = distances[currentVertex] + edge.getWeight();
-                        if (newDist < distances[neighbor])
-                        {
-                            distances[neighbor] = (int)newDist;
-                            previous[neighbor] = currentVertex;
-                        }
+                        distances[neighbor] = (int)newDist;
+                        previous[neighbor] = currentVertex;
                     }
+                    
                 }
             }
 

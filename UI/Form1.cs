@@ -297,7 +297,6 @@ namespace UI
                 }
             }
         }
-
         private void buttonLoad_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
