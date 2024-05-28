@@ -51,6 +51,8 @@ namespace UI
             graphics.Clear(pictureBox1.BackColor);
             foreach (Edge e in edges) e.draw();
             foreach (Vertex v in vertices) v.draw();
+
+            labelEdgeCount.Text = edges.Count.ToString();
         }
         private void isSelectedToFalse()
         {
@@ -206,10 +208,6 @@ namespace UI
             if (mode == Mode.ShortestWay) shortestWay(point);
 
             render();
-
-            label1.Text = edges.Count.ToString();
-            labelXOfPoint.Text = point.X.ToString();
-            labelYOfPoint.Text = point.Y.ToString();
         }
         private void buttonDelete_Click(object sender, EventArgs e)
         {
@@ -335,6 +333,16 @@ namespace UI
                     render(); 
                 }
             }
+        }
+        private void Field_Load(object sender, EventArgs e)
+        {
+            labelEdge.Visible = false;
+            labelEdgeCount.Visible = false;
+        }
+        private void Field_DoubleClick(object sender, EventArgs e)
+        {
+            labelEdge.Visible = labelEdge.Visible ? false : true;
+            labelEdgeCount.Visible = labelEdgeCount.Visible ? false : true;
         }
     }
 }

@@ -71,6 +71,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -91,6 +92,15 @@
       <Project>{58c609d0-cf7f-431e-8c8f-130667f92a27}</Project>
       <Name>ClassLibraryGraph</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\graph-cw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\graph-cw1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\graph-cw2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
