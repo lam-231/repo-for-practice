@@ -271,8 +271,6 @@ namespace UI
             movingVertex.X = movePoint.X;
             movingVertex.Y = movePoint.Y;
 
-            isSelectedToFalse();
-
             render();
         }
         private void buttonShortestWay_Click(object sender, EventArgs e)
