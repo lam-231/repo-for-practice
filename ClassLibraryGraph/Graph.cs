@@ -57,19 +57,19 @@ namespace ClassLibraryGraph
                 foreach (var edge in edges)
                 {
                     if (!edge.doesContainVertex(currentVertex)) continue;
-                    
+
                     var neighbor = (edge.firstVertex == currentVertex) ? edge.secondVertex : edge.firstVertex;
-                    var newDist = distances[currentVertex] + edge.getWeight();
+                    var newDist = distances[currentVertex] + edge.getEdgeSize();
                     if (newDist < distances[neighbor])
                     {
                         distances[neighbor] = (int)newDist;
                         previous[neighbor] = currentVertex;
                     }
-                    
+
                 }
             }
 
-            return null; 
+            return null;
         }
     }
 }

@@ -14,6 +14,7 @@ namespace ClassLibraryGraph
     {
         public Vertex firstVertex { get; set; }
         public Vertex secondVertex { get; set; }
+
         public int weigth { get; set; }
         [JsonIgnore]
         public Graphics G { get; set; }
@@ -49,11 +50,6 @@ namespace ClassLibraryGraph
 
             G.DrawString(text, font, Brushes.Black, x, y);
         }
-
-        public float getWeight()
-        {
-            return (float)Math.Sqrt(Math.Pow(secondVertex.X - firstVertex.X, 2) + Math.Pow(secondVertex.Y - firstVertex.Y, 2));
-        }
         public bool isPointOnEdge(int tryX, int tryY)
         {
             int minX = Math.Min(firstVertex.X, secondVertex.X);
@@ -73,6 +69,5 @@ namespace ClassLibraryGraph
             if (tryVertex == firstVertex || tryVertex == secondVertex) return true;
             return false;
         }
-
     }
 }

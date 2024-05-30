@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ClassLibraryGraph.Edge">
+    <Position X="4.75" Y="6.75" Width="1.5" />
+    <AssociationLine Name="firstVertex" Type="ClassLibraryGraph.Vertex" FixedFromPoint="true">
+      <Path>
+        <Point X="6.25" Y="7.628" />
+        <Point X="9.25" Y="7.628" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>IAAAAAAEAAAAQAAAAAIAAICAAAAAAAAAAAAECAIAAAA=</HashCode>
+      <FileName>Edge.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="firstVertex" />
+      <Property Name="secondVertex" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ClassLibraryGraph.Graph">
+    <Position X="5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Graph.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClassLibraryGraph.GraphElement">
+    <Position X="7" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAIAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GraphElement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClassLibraryGraph.GraphStorage">
+    <Position X="7" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>GraphStorage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ClassLibraryGraph.Vertex">
+    <Position X="9.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAEIACACAAAAAAAgAAAAACAAAYAA=</HashCode>
+      <FileName>Vertex.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -243,11 +243,13 @@ namespace UI
         {
             mode = Mode.AddVertex;
             isSelectedToFalse();
+            render();
         }
         private void buttonSelect_Click(object sender, EventArgs e)
         {
             mode = Mode.Select;
             isSelectedToFalse();
+            render();
         }
         private void buttonAddEdge_Click(object sender, EventArgs e)
         {
@@ -330,6 +332,7 @@ namespace UI
                         lastAddedVertNumber = 0;
                     }
 
+                    isSelectedToFalse();
                     render(); 
                 }
             }

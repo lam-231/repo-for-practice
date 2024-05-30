@@ -18,6 +18,7 @@ namespace ClassLibraryGraph
         public int Number { get; set; }
         [JsonIgnore]
         public Graphics G { get; set; }
+
         public Vertex(int x, int y, int number, Graphics g) 
         {
             X = x;
