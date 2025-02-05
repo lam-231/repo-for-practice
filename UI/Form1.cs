@@ -61,6 +61,8 @@ namespace UI
         }
         private Vertex getVertexByPoint(Point point)
         {
+            if(vertices == null) return null;
+
             foreach (Vertex v in vertices)
             {
                 if (v.isPointOnVertex(point.X, point.Y)) return v;
