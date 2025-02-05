@@ -52,16 +52,20 @@ namespace ClassLibraryGraph
         }
         public bool isPointOnEdge(int tryX, int tryY)
         {
+            const int EdgeThreshold = 7;
+            const int EdgeWidth = 5;
+            const double SlopeThreshold = 0.15;
+
             int minX = Math.Min(firstVertex.X, secondVertex.X);
             int maxX = Math.Max(firstVertex.X, secondVertex.X);
             int minY = Math.Min(firstVertex.Y, secondVertex.Y);
             int maxY = Math.Max(firstVertex.Y, secondVertex.Y);
 
-            if (Math.Abs(firstVertex.Y - secondVertex.Y) < 7) return tryX > minX && tryX < maxX && tryY > firstVertex.Y - 5 && tryY < firstVertex.Y + 5;
+            if (Math.Abs(firstVertex.Y - secondVertex.Y) < EdgeThreshold) return tryX > minX && tryX < maxX && tryY > firstVertex.Y - EdgeWidth && tryY < firstVertex.Y + EdgeWidth;
 
             return tryX >= minX && tryX <= maxX &&
                    tryY >= minY && tryY <= maxY &&
-                   Math.Abs((double)(tryY - firstVertex.Y)/(secondVertex.Y - firstVertex.Y) - (double)(tryX - firstVertex.X) / (secondVertex.X - firstVertex.X)) < 0.15;
+                   Math.Abs((double)(tryY - firstVertex.Y)/(secondVertex.Y - firstVertex.Y) - (double)(tryX - firstVertex.X) / (secondVertex.X - firstVertex.X)) < SlopeThreshold;
         }
 
         public bool doesContainVertex(Vertex tryVertex)
