@@ -87,16 +87,13 @@ namespace UI
             lastAddedVertNumber++;
             vertices.Add(vertex);
         }
+        private bool isEdgeExists(Vertex firstVertex, Vertex secondVertex)
+        {
+            return edges.Any(e => e.doesContainVertex(firstVertex) && e.doesContainVertex(secondVertex));
+        }
         private void addEdge(Point point)
         {
-            Vertex firstVertex = null;
-
-            foreach (var v in vertices)
-                if (v.IsSelected)
-                {
-                    firstVertex = v;
-                    break;
-                }
+            Vertex firstVertex = vertices.FirstOrDefault(v => v.IsSelected);
 
             if (firstVertex == null)
             {
@@ -104,12 +101,11 @@ namespace UI
                 if (firstVertex != null) firstVertex.IsSelected = true;
                 return;
             }
-            
+
             Vertex secondVertex = getVertexByPoint(point);
 
-            foreach (var e in edges) if (e.doesContainVertex(firstVertex) && e.doesContainVertex(secondVertex)) return;
-
-            if (secondVertex == null || firstVertex == secondVertex) return;
+            if (secondVertex == null || firstVertex == secondVertex || isEdgeExists(firstVertex, secondVertex))
+                return;
 
             Edge edge = new Edge(firstVertex, secondVertex, graphics);
             edges.Add(edge);
