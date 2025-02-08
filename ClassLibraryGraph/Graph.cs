@@ -37,8 +37,8 @@ namespace ClassLibraryGraph
 
                         foreach (var e in edges)
                         {
-                            if ((e.firstVertex == currentVertex && e.secondVertex == prevVertex) ||
-                                (e.firstVertex == prevVertex && e.secondVertex == currentVertex))
+                            if ((e.FirstVertex == currentVertex && e.SecondVertex == prevVertex) ||
+                                (e.FirstVertex == prevVertex && e.SecondVertex == currentVertex))
                             {
                                 edge = e;
                                 break;
@@ -56,10 +56,10 @@ namespace ClassLibraryGraph
 
                 foreach (var edge in edges)
                 {
-                    if (!edge.doesContainVertex(currentVertex)) continue;
+                    if (!edge.ContainsVertex(currentVertex)) continue;
 
-                    var neighbor = (edge.firstVertex == currentVertex) ? edge.secondVertex : edge.firstVertex;
-                    var newDist = distances[currentVertex] + edge.getEdgeSize();
+                    var neighbor = (edge.FirstVertex == currentVertex) ? edge.SecondVertex : edge.FirstVertex;
+                    var newDist = distances[currentVertex] + edge.CalculateWeight();
                     if (newDist < distances[neighbor])
                     {
                         distances[neighbor] = (int)newDist;

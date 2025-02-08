@@ -2,7 +2,7 @@
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="ClassLibraryGraph.Edge">
     <Position X="4.75" Y="6.75" Width="1.5" />
-    <AssociationLine Name="firstVertex" Type="ClassLibraryGraph.Vertex" FixedFromPoint="true">
+    <AssociationLine Name="FirstVertex" Type="ClassLibraryGraph.Vertex" FixedFromPoint="true">
       <Path>
         <Point X="6.25" Y="7.628" />
         <Point X="9.25" Y="7.628" />
@@ -13,8 +13,8 @@
       <FileName>Edge.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="firstVertex" />
-      <Property Name="secondVertex" />
+      <Property Name="FirstVertex" />
+      <Property Name="SecondVertex" />
     </ShowAsAssociation>
   </Class>
   <Class Name="ClassLibraryGraph.Graph">
