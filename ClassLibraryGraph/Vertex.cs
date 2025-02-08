@@ -12,19 +12,21 @@ namespace ClassLibraryGraph
 
     public class Vertex : GraphElement
     {
-        const int Radius = 15; 
+        private const int Radius = 15;
+
         public int X { get; set; }
         public int Y { get; set; }
         public int Number { get; set; }
-        [JsonIgnore]
-        public Graphics GraphicsProp { get; set; }
 
-        public Vertex(int x, int y, int number, Graphics g) 
+        [JsonIgnore]
+        public Graphics GraphicsProp { get; private set; }
+
+        public Vertex(int x, int y, int number, Graphics graphics)
         {
             X = x;
             Y = y;
             Number = number;
-            GraphicsProp = g;
+            GraphicsProp = graphics;
             IsSelected = false;
         }
         public Vertex() { }
@@ -32,9 +34,9 @@ namespace ClassLibraryGraph
         {
             GraphicsProp = graphics;
         }
-        public bool isPointOnVertex(int tryX, int tryY) 
+        public bool IsPointOnVertex(int x, int y)
         {
-            return Math.Pow(X - tryX, 2) + Math.Pow(Y - tryY, 2) <= Math.Pow(Radius, 2);
+            return Math.Pow(X - x, 2) + Math.Pow(Y - y, 2) <= Math.Pow(Radius, 2);
         }
 
         public bool isOverlapingWithVertexInPoint(int tryX, int tryY) 
