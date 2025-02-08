@@ -7,7 +7,7 @@ using System.Drawing;
 using System.Security.Cryptography.X509Certificates;
 using Newtonsoft.Json;
 
-namespace ClassLibraryGraph 
+namespace ClassLibraryGraph
 {
 
     public class Vertex : GraphElement
@@ -30,7 +30,7 @@ namespace ClassLibraryGraph
             IsSelected = false;
         }
         public Vertex() { }
-        public void SetGraphics(Graphics graphics) 
+        public void SetGraphics(Graphics graphics)
         {
             GraphicsProp = graphics;
         }
@@ -46,21 +46,31 @@ namespace ClassLibraryGraph
 
         public override void Draw()
         {
+            DrawEllipse();
+            DrawNumber();
+        }
+
+        private void DrawEllipse()
+        {
             GraphicsProp.FillEllipse(Brushes.DimGray, X - Radius, Y - Radius, Radius * 2, Radius * 2);
 
-            Color color = IsSelected ? Color.Orange: Color.DarkGray;
-            Pen pen = new Pen(color, 3);
+            Color color = IsSelected ? Color.Orange : Color.DarkGray;
+            using (var pen = new Pen(color, 3))
+            {
+                GraphicsProp.DrawEllipse(pen, X - Radius, Y - Radius, Radius * 2, Radius * 2);
+            }
+        }
 
-            GraphicsProp.DrawEllipse(pen, X - Radius, Y - Radius, Radius * 2, Radius * 2);
-
+        private void DrawNumber()
+        {
             string text = Number.ToString();
-
             Font font = new Font("Arial", 12);
             SizeF textSize = GraphicsProp.MeasureString(text, font);
             float x = X + 1 - textSize.Width / 2;
             float y = Y + 1 - textSize.Height / 2;
 
             GraphicsProp.DrawString(text, font, Brushes.White, x, y);
+
         }
     }
 }
