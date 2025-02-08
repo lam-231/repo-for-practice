@@ -39,11 +39,11 @@ namespace ClassLibraryGraph
             return Math.Pow(X - x, 2) + Math.Pow(Y - y, 2) <= Math.Pow(Radius, 2);
         }
 
-        public bool isOverlapingWithVertexInPoint(int tryX, int tryY) 
+        public bool IsOverlappingWithVertexAtPoint(int x, int y)
         {
-            return Math.Sqrt(Math.Pow(X - tryX, 2) + Math.Pow(Y - tryY, 2)) <= 2 * Radius + 1;
-        } 
-        
+            return Math.Sqrt(Math.Pow(X - x, 2) + Math.Pow(Y - y, 2)) <= 2 * Radius + 1;
+        }
+
         public override void Draw()
         {
             GraphicsProp.FillEllipse(Brushes.DimGray, X - Radius, Y - Radius, Radius * 2, Radius * 2);
