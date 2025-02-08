@@ -49,8 +49,8 @@ namespace UI
         private void render()
         {
             graphics.Clear(pictureBox1.BackColor);
-            foreach (Edge e in edges) e.draw();
-            foreach (Vertex v in vertices) v.draw();
+            foreach (Edge e in edges) e.Draw();
+            foreach (Vertex v in vertices) v.Draw();
 
             labelEdgeCount.Text = edges.Count.ToString();
         }
@@ -65,7 +65,7 @@ namespace UI
 
             foreach (Vertex v in vertices)
             {
-                if (v.isPointOnVertex(point.X, point.Y)) return v;
+                if (v.IsPointOnVertex(point.X, point.Y)) return v;
             }
             return null;
         }
@@ -73,7 +73,7 @@ namespace UI
         {
             foreach (Edge e in edges)
             {
-                if (e.isPointOnEdge(point.X, point.Y)) return e;
+                if (e.IsPointOnEdge(point.X, point.Y)) return e;
             }
             return null;
         }
@@ -83,36 +83,36 @@ namespace UI
 
             foreach (var vert in vertices)
             {
-                if (vert.isOverlapingWithVertexInPoint(point.X, point.Y)) return;
+                if (vert.IsOverlappingWithVertexAtPoint(point.X, point.Y)) return;
             }
 
             lastAddedVertNumber++;
             vertices.Add(vertex);
         }
-        private bool isEdgeExists(Vertex firstVertex, Vertex secondVertex)
+        private bool isEdgeExists(Vertex FirstVertex, Vertex SecondVertex)
         {
-            return edges.Any(e => e.doesContainVertex(firstVertex) && e.doesContainVertex(secondVertex));
+            return edges.Any(e => e.ContainsVertex(FirstVertex) && e.ContainsVertex(SecondVertex));
         }
         private void addEdge(Point point)
         {
-            Vertex firstVertex = vertices.FirstOrDefault(v => v.IsSelected);
+            Vertex FirstVertex = vertices.FirstOrDefault(v => v.IsSelected);
 
-            if (firstVertex == null)
+            if (FirstVertex == null)
             {
-                firstVertex = getVertexByPoint(point);
-                if (firstVertex != null) firstVertex.IsSelected = true;
+                FirstVertex = getVertexByPoint(point);
+                if (FirstVertex != null) FirstVertex.IsSelected = true;
                 return;
             }
 
-            Vertex secondVertex = getVertexByPoint(point);
+            Vertex SecondVertex = getVertexByPoint(point);
 
-            if (secondVertex == null || firstVertex == secondVertex || isEdgeExists(firstVertex, secondVertex))
+            if (SecondVertex == null || FirstVertex == SecondVertex || isEdgeExists(FirstVertex, SecondVertex))
                 return;
 
-            Edge edge = new Edge(firstVertex, secondVertex, graphics);
+            Edge edge = new Edge(FirstVertex, SecondVertex, graphics);
             edges.Add(edge);
 
-            firstVertex.IsSelected = false;
+            FirstVertex.IsSelected = false;
             render();
         }
         private void selectElement(Point point, bool isSelectMultiple)
@@ -166,8 +166,8 @@ namespace UI
                 foreach (var edge in path) 
                 {
                     edge.IsSelected = true;
-                    edge.firstVertex.IsSelected = true;
-                    edge.secondVertex.IsSelected = true;
+                    edge.FirstVertex.IsSelected = true;
+                    edge.SecondVertex.IsSelected = true;
                 }
                 render();
             }
@@ -226,7 +226,7 @@ namespace UI
                 verticesToRemove.Add(vert);
                 foreach (var edge in edges)
                 { 
-                    if(edge.doesContainVertex(vert)) edgesToRemove.Add(edge);
+                    if(edge.ContainsVertex(vert)) edgesToRemove.Add(edge);
                 }
             }
 
@@ -309,14 +309,14 @@ namespace UI
                     
                     foreach (var vertex in vertices)
                     {
-                        vertex.G = graphics;
+                        vertex.GraphicsProp = graphics;
                     }
 
                     foreach (var edge in edges)
                     {
-                        edge.G = graphics; 
-                        edge.firstVertex = vertices.FirstOrDefault(v => v.Number == edge.firstVertex.Number); 
-                        edge.secondVertex = vertices.FirstOrDefault(v => v.Number == edge.secondVertex.Number); 
+                        edge.GraphicsProp = graphics; 
+                        edge.FirstVertex = vertices.FirstOrDefault(v => v.Number == edge.FirstVertex.Number); 
+                        edge.SecondVertex = vertices.FirstOrDefault(v => v.Number == edge.SecondVertex.Number); 
                     }
 
                     if (vertices.Count > 0)

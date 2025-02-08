@@ -11,6 +11,6 @@ namespace ClassLibraryGraph
     { 
         public bool IsSelected { get; set; }
 
-        public abstract void draw();
+        public abstract void Draw();
     }
 }
