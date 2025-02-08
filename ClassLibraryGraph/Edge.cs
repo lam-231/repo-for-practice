@@ -78,5 +78,6 @@ namespace ClassLibraryGraph
             return vertex == FirstVertex || vertex == SecondVertex;
 
         }
+        public Vertex GetNeighbor(Vertex vertex) => vertex == FirstVertex ? SecondVertex : FirstVertex;
     }
 }
