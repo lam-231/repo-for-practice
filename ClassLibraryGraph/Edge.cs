@@ -12,66 +12,71 @@ namespace ClassLibraryGraph
 {
     public class Edge : GraphElement
     {
-        public Vertex firstVertex { get; set; }
-        public Vertex secondVertex { get; set; }
-
-        public int weigth { get; set; }
+        public Vertex FirstVertex { get; set; }
+        public Vertex SecondVertex { get; set; }
+        public int Weight { get; private set; }
         [JsonIgnore]
-        public Graphics G { get; set; }
+        public Graphics GraphicsProp { get; set; }
         public Edge() { }
-        public void SetGraphics(Graphics graphics)
+        public Edge(Vertex firstVertex, Vertex secondVertex, Graphics Graphics)
         {
-            G = graphics;
-        }
-        public Edge(Vertex firstVertex, Vertex secondVertex, Graphics G)
-        {
-            this.firstVertex = firstVertex;
-            this.secondVertex = secondVertex;
-            this.G = G;
-            weigth = getEdgeSize();
+            FirstVertex = firstVertex;
+            SecondVertex = secondVertex;
+            GraphicsProp = Graphics;
+            Weight = CalculateWeight();
             IsSelected = false;
         }
-        public int getEdgeSize()
+        public void SetGraphics(Graphics graphics)
         {
-            return (int)Math.Sqrt(Math.Pow(firstVertex.X - secondVertex.X, 2) + Math.Pow(firstVertex.Y - secondVertex.Y, 2));
+            GraphicsProp = graphics;
         }
-        public override void draw()
+        public int CalculateWeight()
         {
-            Color color = IsSelected ? Color.Orange : Color.LightGray;
-            Pen pen = new Pen(color, 5);
-            G.DrawLine(pen, firstVertex.X, firstVertex.Y, secondVertex.X, secondVertex.Y);
-
-            string text = getEdgeSize().ToString();
-
-            Font font = new Font("Arial", 7);
-            SizeF textSize = G.MeasureString(text, font);
-            float x = (firstVertex.X + secondVertex.X) / 2 + 1 - textSize.Width / 2;
-            float y = (firstVertex.Y + secondVertex.Y) / 2 + 1 - textSize.Height / 2;
-
-            G.DrawString(text, font, Brushes.Black, x, y);
+            return (int)Math.Sqrt(Math.Pow(FirstVertex.X - SecondVertex.X, 2) + Math.Pow(FirstVertex.Y - SecondVertex.Y, 2));
         }
-        public bool isPointOnEdge(int tryX, int tryY)
+        public override void Draw()
+        {
+            const int PenWidth = 5;
+            const int EmSize = 7;
+
+            var penColor = IsSelected ? Color.Orange : Color.LightGray;
+            using (var pen = new Pen(penColor, PenWidth))
+            {
+                GraphicsProp.DrawLine(pen, FirstVertex.X, FirstVertex.Y, SecondVertex.X, SecondVertex.Y);
+            }
+
+            var text = Weight.ToString();
+            var font = new Font("Arial", EmSize);
+            var textSize = GraphicsProp.MeasureString(text, font);
+            var x = (FirstVertex.X + SecondVertex.X) / 2 + 1 - textSize.Width / 2;
+            var y = (FirstVertex.Y + SecondVertex.Y) / 2 + 1 - textSize.Height / 2;
+
+            GraphicsProp.DrawString(text, font, Brushes.Black, x, y);
+        }
+        public bool IsPointOnEdge(int x, int y)
         {
             const int EdgeThreshold = 7;
             const int EdgeWidth = 5;
-            const double SlopeThreshold = 0.15;
+            const double SlopeThreshold = 0.15d;
 
-            int minX = Math.Min(firstVertex.X, secondVertex.X);
-            int maxX = Math.Max(firstVertex.X, secondVertex.X);
-            int minY = Math.Min(firstVertex.Y, secondVertex.Y);
-            int maxY = Math.Max(firstVertex.Y, secondVertex.Y);
+            var minX = Math.Min(FirstVertex.X, SecondVertex.X);
+            var maxX = Math.Max(FirstVertex.X, SecondVertex.X);
+            var minY = Math.Min(FirstVertex.Y, SecondVertex.Y);
+            var maxY = Math.Max(FirstVertex.Y, SecondVertex.Y);
 
-            if (Math.Abs(firstVertex.Y - secondVertex.Y) < EdgeThreshold) return tryX > minX && tryX < maxX && tryY > firstVertex.Y - EdgeWidth && tryY < firstVertex.Y + EdgeWidth;
+            if (Math.Abs(FirstVertex.Y - SecondVertex.Y) < EdgeThreshold)
+            {
+                return x > minX && x < maxX && y > FirstVertex.Y - EdgeWidth && y < FirstVertex.Y + EdgeWidth;
+            }
 
-            return tryX >= minX && tryX <= maxX &&
-                   tryY >= minY && tryY <= maxY &&
-                   Math.Abs((double)(tryY - firstVertex.Y)/(secondVertex.Y - firstVertex.Y) - (double)(tryX - firstVertex.X) / (secondVertex.X - firstVertex.X)) < SlopeThreshold;
+            return x >= minX && x <= maxX &&
+                   y >= minY && y <= maxY &&
+                   Math.Abs((double)(y - FirstVertex.Y) / (SecondVertex.Y - FirstVertex.Y) - (double)(x - FirstVertex.X) / (SecondVertex.X - FirstVertex.X)) < SlopeThreshold;
         }
-
-        public bool doesContainVertex(Vertex tryVertex)
+        public bool ContainsVertex(Vertex vertex)
         {
-            if (tryVertex == firstVertex || tryVertex == secondVertex) return true;
-            return false;
+            return vertex == FirstVertex || vertex == SecondVertex;
+
         }
     }
 }
