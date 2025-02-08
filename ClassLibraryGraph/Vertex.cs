@@ -19,7 +19,7 @@ namespace ClassLibraryGraph
         public int Number { get; set; }
 
         [JsonIgnore]
-        public Graphics GraphicsProp { get; private set; }
+        public Graphics GraphicsProp { get; set; }
 
         public Vertex(int x, int y, int number, Graphics graphics)
         {

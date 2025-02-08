@@ -65,7 +65,7 @@ namespace UI
 
             foreach (Vertex v in vertices)
             {
-                if (v.isPointOnVertex(point.X, point.Y)) return v;
+                if (v.IsPointOnVertex(point.X, point.Y)) return v;
             }
             return null;
         }
@@ -83,7 +83,7 @@ namespace UI
 
             foreach (var vert in vertices)
             {
-                if (vert.isOverlapingWithVertexInPoint(point.X, point.Y)) return;
+                if (vert.IsOverlappingWithVertexAtPoint(point.X, point.Y)) return;
             }
 
             lastAddedVertNumber++;
